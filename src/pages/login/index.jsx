@@ -47,7 +47,7 @@ const Index = () => {
                 </Typography>
             </Box>
             <Box
-                width={isNonMobileScreens ? "50%" : "93%"}
+                width={isNonMobileScreens ? "30%" : "93%"}
                 p="2rem"
                 m="2rem auto"
                 borderRadius="1.5rem"
@@ -74,10 +74,10 @@ const Index = () => {
                                 <Box
                                     display="grid"
                                     gap="30px"
-                                    gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+                                    gridTemplateColumns="repeat(1, minmax(0, 1fr))"
                                     sx={{
                                         "& > div": {
-                                            gridColumn: isNonMobileScreens ? undefined : "span 4"
+                                            gridColumn: isNonMobileScreens ? undefined : "span 1"
                                         }
                                     }}>
                                     <TextField
