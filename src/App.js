@@ -1,7 +1,16 @@
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
-import HomePage from 'scenes/homePage';
-import LoginPage from 'scenes/loginPage';
-import ProfilePage from 'scenes/profilePage';
+// import HomePage from 'scenes/homePage';
+// import LoginPage from 'scenes/loginPage';
+// import ProfilePage from 'scenes/profilePage';
+
+import {
+    LoginPage,
+    RegisterPage,
+    HomePage,
+    ProfilePage,
+    LandingPage
+} from './pages';
+
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { CssBaseline, ThemeProvider } from '@mui/material';
@@ -9,21 +18,23 @@ import { createTheme } from '@mui/material/styles';
 import { themeSettings } from 'theme';
 
 function App() {
-  const mode = useSelector((state) => state.mode);
-  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
-  return (
-    <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/profile/:userId" element={<ProfilePage />} />
-        </Routes>
-      </ThemeProvider>
+    const mode = useSelector((state) => state.mode);
+    const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+    return (
+        <BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Routes>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/profile/:userId" element={<ProfilePage />} />
+                </Routes>
+            </ThemeProvider>
 
-    </BrowserRouter>
-  );
+        </BrowserRouter>
+    );
 }
 
 export default App;
