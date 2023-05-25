@@ -36,7 +36,7 @@ const initialValueRegister = {
 
 
 
-const Index = () => {
+const RegisterPage = () => {
   const { palette } = useTheme();
   const navigate = useNavigate();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
@@ -246,4 +246,4 @@ const Index = () => {
   );
 }
 
-export default Index
+export default RegisterPage;

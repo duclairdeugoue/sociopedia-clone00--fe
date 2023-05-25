@@ -1,1 +1,1 @@
-export { default } from './widget-wrapper';
+export { default } from './WidgetWrapper';

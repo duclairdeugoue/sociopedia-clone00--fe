@@ -1,1 +1,1 @@
-export { default } from './home-card-userprofile'
+export { default } from './HomeCardUserprofile'

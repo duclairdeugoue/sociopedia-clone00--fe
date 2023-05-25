@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "state";
 
-const Index = () => {
+const LoginPage = () => {
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -159,4 +159,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default LoginPage;

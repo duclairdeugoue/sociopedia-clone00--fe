@@ -1,1 +1,1 @@
-export { default } from './flex-between';
+export { default } from './FlexBetween';

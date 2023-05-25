@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import Navbar from "components/organisms/navbar";
 
-const Index = () => {
+const HomePage = () => {
   return (
     <Box>
       <Navbar />
@@ -9,4 +9,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default HomePage
