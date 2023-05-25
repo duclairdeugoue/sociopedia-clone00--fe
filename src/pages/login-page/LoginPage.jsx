@@ -9,13 +9,14 @@ import {
 import { Formik } from 'formik';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { setLogin } from "contexts";
+import { useDispatch } from "react-redux";
+import { AuthService } from "services";
 
 const LoginPage = () => {
   const { palette } = useTheme();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
   const loginSchema = yup.object().shape({
@@ -28,17 +29,9 @@ const LoginPage = () => {
     password: "",
   };
 
-  const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch(
-      'http://localhost:3001/auth/login',
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values)
-      }
-    );
-    const loggedIn = await loggedInResponse.json();
-    onSubmitProps.resetForm();
+
+  const handleLoginFormSubmit = async (values, onSubmitProps) => {
+    const loggedIn = await AuthService.login(values);
     if (loggedIn) {
       dispatch(
         setLogin({
@@ -46,11 +39,9 @@ const LoginPage = () => {
           token: loggedIn.token
         })
       );
+      onSubmitProps.resetForm();
       navigate("/home");
     }
-  }
-  const handleLoginFormSubmit = async (values, onSubmitProps) => {
-    await login(values, onSubmitProps);
   };
 
   return (

@@ -1,3 +1,6 @@
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ManageAccountsOutlined,
   EditOutlined,
@@ -5,15 +8,23 @@ import {
   WorkOutlineOutlined
 } from "@mui/icons-material";
 import {
-  Box, Typography, Divider, useTheme
+  Box,
+  Typography,
+  Divider,
+  useTheme
 } from "@mui/material";
 import {
-  UserImage, FlexBetween, WidgetWrapper
+  UserImage,
+  FlexBetween,
+  WidgetWrapper
 } from 'components/molecules';
 
 
-const HomeCardUserProfile = () => {
-
+const HomeCardUserProfile = ({ userId, picturePath }) => {
+  const [user, setUser] = useState(null);
+  const { palette } = useTheme(null);
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.token);
 }
 
 export default HomeCardUserProfile;

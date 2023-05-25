@@ -12,6 +12,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import Dropzone from "react-dropzone";
 import { FlexBetween } from "components/molecules";
+import { AuthService } from 'services';
 
 const registerSchema = yup.object().shape({
   firstName: yup.string().required("required"),
@@ -35,13 +36,12 @@ const initialValueRegister = {
 };
 
 
-
 const RegisterPage = () => {
   const { palette } = useTheme();
   const navigate = useNavigate();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
 
-  const register = async (values, onSubmitProps) => {
+  const handleRegisterFormSubmit = async (values, onSubmitProps) => {
     // This allows us to send form infos with image
     const formData = new FormData();
     for (let value in values) {
@@ -49,22 +49,11 @@ const RegisterPage = () => {
     }
     formData.append('picturePath', values.picture.name);
 
-    const saveUserResponse = await fetch(
-      'http://localhost:3001/auth/register',
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    const savedUser = await saveUserResponse.json();
-    onSubmitProps.resetForm();
-
-    if (savedUser) navigate('/login');
-
-  };
-
-  const handleRegisterFormSubmit = async (values, onSubmitProps) => {
-    await register(values, onSubmitProps);
+    const savedUser = await AuthService.register(formData);
+    if (savedUser) {
+      onSubmitProps.resetForm();
+      navigate('/login');
+    }
   }
 
   return (
