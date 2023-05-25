@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import Navbar from "scenes/navbar";
+import Navbar from "components/organisms/navbar";
 
 const Index = () => {
   return (

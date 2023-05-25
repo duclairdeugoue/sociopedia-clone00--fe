@@ -24,9 +24,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { setMode, setLogout } from 'state';
 import { useNavigate } from 'react-router-dom';
-import FlexBetween from 'components/FlexBetween';
+import FlexBetween from 'components';
 
-const Navbar = () => {
+const HomeHeader = () => {
   const [isMobileMenuToggle, setIsMobileMenuToggle] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -196,4 +196,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default HomeHeader;
