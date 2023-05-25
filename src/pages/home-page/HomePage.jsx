@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
-import Navbar from "components/organisms/navbar";
+import { HomeHeader } from "components/organisms";
 
 const HomePage = () => {
   return (
     <Box>
-      <Navbar />
+      <HomeHeader />
     </Box>
   )
 }

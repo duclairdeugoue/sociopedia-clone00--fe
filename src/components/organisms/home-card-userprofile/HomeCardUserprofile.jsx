@@ -9,7 +9,8 @@ import {
 } from "@mui/material";
 import {
   UserImage, FlexBetween, WidgetWrapper
-} from 'components';
+} from 'components/molecules';
+
 
 const HomeCardUserProfile = () => {
 
