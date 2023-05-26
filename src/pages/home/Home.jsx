@@ -1,5 +1,5 @@
 import { Box, useMediaQuery } from "@mui/material";
-import { HomeSectionProfile, HomeSectionHeader, HomeSectionPost } from "widgets";
+import { HeaderWidget, ProfileWidget, PostWidget } from "widgets";
 import { useSelector } from "react-redux";
 
 const Home = () => {
@@ -7,7 +7,7 @@ const Home = () => {
     const { _id, picturePath } = useSelector((state) => state.user);
     return (
         <Box>
-            <HomeSectionHeader />
+            <HeaderWidget />
             <Box
                 width="100%"
                 padding="2rem 6%"
@@ -15,12 +15,12 @@ const Home = () => {
                 gap="0.5rem"
                 justifyContent="space-between">
                 <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-                    <HomeSectionProfile userId={_id} picturePath={picturePath} />
+                    <ProfileWidget userId={_id} picturePath={picturePath} />
                 </Box>
                 <Box
                     flexBasis={isNonMobileScreens ? "42%" : undefined}
                     mt={isNonMobileScreens ? undefined : "2rem"}>
-                    <HomeSectionPost picturePath={picturePath} />
+                    <PostWidget picturePath={picturePath} />
                 </Box>
                 {
                     isNonMobileScreens && (<Box flexBasis="26%"></Box>)
