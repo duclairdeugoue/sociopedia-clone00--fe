@@ -14,9 +14,9 @@ import {
     useTheme
 } from "@mui/material";
 import {
-    UserImage,
-    FlexBetween,
-    WidgetWrapper
+    UserImageComponent,
+    FlexBetweenComponent,
+    WidgetWrapperComponent
 } from 'components';
 import { UsersService } from "services";
 import linkedln from "assets/icons/linkedin.png";
@@ -59,14 +59,14 @@ const Profile = ({ userId, picturePath }) => {
     } = user;
 
     return (
-        <WidgetWrapper>
+        <WidgetWrapperComponent>
             {/* FIRST ROW */}
-            <FlexBetween
+            <FlexBetweenComponent
                 gap="0.5rem"
                 pb="1.1rem"
                 onClick={() => navigate(`/profile/${userId}`)}>
-                <FlexBetween gap="1rem">
-                    <UserImage image={picturePath} />
+                <FlexBetweenComponent gap="1rem">
+                    <UserImageComponent image={picturePath} />
                     <Box>
                         <Typography
                             variant="h4"
@@ -82,9 +82,9 @@ const Profile = ({ userId, picturePath }) => {
                         </Typography>
                         <Typography color={medium}>{friends.length} friends</Typography>
                     </Box>
-                </FlexBetween>
+                </FlexBetweenComponent>
                 <ManageAccountsOutlined />
-            </FlexBetween>
+            </FlexBetweenComponent>
             <Divider />
 
             {/* SECOND ROW */}
@@ -105,15 +105,15 @@ const Profile = ({ userId, picturePath }) => {
 
             {/* THIRD ROW */}
             <Box p="1rem 0">
-                <FlexBetween mb="0.5rem">
+                <FlexBetweenComponent mb="0.5rem">
                     <Typography color={medium}>Who viewed your profile</Typography>
                     <Typography color={main} fontWeight="500">{viewedProfile}</Typography>
-                </FlexBetween>
+                </FlexBetweenComponent>
 
-                <FlexBetween mb="0.5rem">
+                <FlexBetweenComponent mb="0.5rem">
                     <Typography color={medium}>Impressions of your post</Typography>
                     <Typography color={main} fontWeight="500">{impressions}</Typography>
-                </FlexBetween>
+                </FlexBetweenComponent>
             </Box>
 
             {/* FOURTH ROW */}
@@ -122,8 +122,8 @@ const Profile = ({ userId, picturePath }) => {
                     Social Profiles
                 </Typography>
 
-                <FlexBetween gap="1rem" mb="0.5rem">
-                    <FlexBetween gap="1rem">
+                <FlexBetweenComponent gap="1rem" mb="0.5rem">
+                    <FlexBetweenComponent gap="1rem">
                         <img src={twitter} alt="twitter" />
                         <Box>
                             <Typography
@@ -133,12 +133,12 @@ const Profile = ({ userId, picturePath }) => {
                             </Typography>
                             <Typography color={medium}>Social Network</Typography>
                         </Box>
-                    </FlexBetween>
+                    </FlexBetweenComponent>
                     <EditOutlined sx={{ color: main }} />
-                </FlexBetween>
+                </FlexBetweenComponent>
 
-                <FlexBetween gap="1rem">
-                    <FlexBetween gap="1rem">
+                <FlexBetweenComponent gap="1rem">
+                    <FlexBetweenComponent gap="1rem">
                         <img src={linkedln} alt="linkedin" />
                         <Box>
                             <Typography
@@ -148,11 +148,11 @@ const Profile = ({ userId, picturePath }) => {
                             </Typography>
                             <Typography color={medium}>Network Platform</Typography>
                         </Box>
-                    </FlexBetween>
+                    </FlexBetweenComponent>
                     <EditOutlined sx={{ color: main }} />
-                </FlexBetween>
+                </FlexBetweenComponent>
             </Box>
-        </WidgetWrapper>
+        </WidgetWrapperComponent>
     )
 
 };
