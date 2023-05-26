@@ -11,7 +11,7 @@ import { Formik } from 'formik';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import Dropzone from "react-dropzone";
-import { FlexBetween } from "components";
+import { FlexBetweenComponent } from "components";
 import { AuthService } from 'services';
 
 const registerSchema = yup.object().shape({
@@ -162,12 +162,12 @@ const Register = () => {
                                                         (
                                                             <p>Click here to add a picture</p>
                                                         ) : (
-                                                            <FlexBetween>
+                                                            <FlexBetweenComponent>
                                                                 <Typography>
                                                                     {values.picture.name}
                                                                 </Typography>
                                                                 <EditOutlinedIcon />
-                                                            </FlexBetween>
+                                                            </FlexBetweenComponent>
                                                         )
                                                     }
 
