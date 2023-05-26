@@ -24,7 +24,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { setMode, setLogout } from 'contexts';
 import { useNavigate } from 'react-router-dom';
-import { FlexBetween } from 'components';
+import { FlexBetweenComponent } from 'components';
 
 const Header = () => {
     const [isMobileMenuToggle, setIsMobileMenuToggle] = useState(false);
@@ -46,8 +46,8 @@ const Header = () => {
     const fullName = `${user.firstName} ${user.lastName}`;
 
     return (
-        <FlexBetween padding="1rem 6%" backgroundColor={alt}>
-            <FlexBetween gap="1.75rem">
+        <FlexBetweenComponent padding="1rem 6%" backgroundColor={alt}>
+            <FlexBetweenComponent gap="1.75rem">
                 <Typography
                     fontWeight="bold"
                     fontSize="clamp(1rem, 2rem, 2.25rem)"
@@ -63,7 +63,7 @@ const Header = () => {
                     Sociopedia
                 </Typography>
                 {isNonMobileScreens && (
-                    <FlexBetween
+                    <FlexBetweenComponent
                         backgroundColor={neutralLight}
                         borderRadius="9px"
                         gap="3rem"
@@ -73,14 +73,14 @@ const Header = () => {
                         <IconButton>
                             <Search />
                         </IconButton>
-                    </FlexBetween>)
+                    </FlexBetweenComponent>)
                 }
-            </FlexBetween>
+            </FlexBetweenComponent>
 
             {/* DESKTOP NAV */}
             {isNonMobileScreens ?
                 (
-                    <FlexBetween gap="2rem">
+                    <FlexBetweenComponent gap="2rem">
                         <IconButton onClick={() => dispatch(setMode())}>
                             {theme.palette.mode === "dark" ?
                                 (
@@ -119,7 +119,7 @@ const Header = () => {
                                 </MenuItem>
                             </Select>
                         </FormControl>
-                    </FlexBetween>
+                    </FlexBetweenComponent>
                 ) : (
                     <IconButton
                         onClick={() => setIsMobileMenuToggle(!isMobileMenuToggle)}
@@ -151,7 +151,7 @@ const Header = () => {
                     </Box>
 
                     {/* MENU ITEMS */}
-                    <FlexBetween display="flex" flexDirection="column" justifyContent="center" gap="3rem">
+                    <FlexBetweenComponent display="flex" flexDirection="column" justifyContent="center" gap="3rem">
                         <IconButton onClick={() => dispatch(setMode())} sx={{ fontSize: "25px" }} >
                             {theme.palette.mode === "dark" ? (
                                 <DarkMode sx={{ fontSize: "25px" }} />
@@ -189,10 +189,10 @@ const Header = () => {
                                 </MenuItem>
                             </Select>
                         </FormControl>
-                    </FlexBetween>
+                    </FlexBetweenComponent>
                 </Box>
             )}
-        </FlexBetween>
+        </FlexBetweenComponent>
     )
 }
 
