@@ -17,7 +17,11 @@ import {
     IconButton,
     useMediaQuery
 } from "@mui/material";
-import { FlexBetween, UserImage, WidgetWrapper } from "components";
+import {
+    FlexBetweenComponent,
+    UserImageComponent,
+    WidgetWrapperComponent
+} from "components";
 import Dropzone from "react-dropzone";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -52,9 +56,9 @@ const Post = ({ picturePath }) => {
         setPost("");
     }
     return (
-        <WidgetWrapper>
-            <FlexBetween gap="1.5rem">
-                <UserImage image={picturePath} />
+        <WidgetWrapperComponent>
+            <FlexBetweenComponent gap="1.5rem">
+                <UserImageComponent image={picturePath} />
                 <InputBase
                     placeholder="What is on your mind...?"
                     onChange={(e) => setPost(e.target.value)}
@@ -66,7 +70,7 @@ const Post = ({ picturePath }) => {
                         padding: "1rem 2rem",
                     }}
                 />
-            </FlexBetween>
+            </FlexBetweenComponent>
             {isImage && (
                 <Box
                     border={`1px solid ${medium}`}
@@ -81,7 +85,7 @@ const Post = ({ picturePath }) => {
                         }}
                     >
                         {({ getRootProps, getInputProps }) => (
-                            <FlexBetween>
+                            <FlexBetweenComponent>
                                 <Box
                                     {...getRootProps()}
                                     border={`2px dashed ${palette.primary.main}`}
@@ -93,12 +97,12 @@ const Post = ({ picturePath }) => {
                                     {!image ? (
                                         <p>Click here to add a image</p>
                                     ) : (
-                                        <FlexBetween>
+                                        <FlexBetweenComponent>
                                             <Typography>
                                                 {image.name}
                                             </Typography>
                                             <EditOutlined />
-                                        </FlexBetween>
+                                        </FlexBetweenComponent>
                                     )
                                     }
 
@@ -109,7 +113,7 @@ const Post = ({ picturePath }) => {
                                 >
                                     <DeleteOutlined />
                                 </IconButton>
-                            </FlexBetween>
+                            </FlexBetweenComponent>
                         )}
                     </Dropzone>
                 </Box>
@@ -117,35 +121,35 @@ const Post = ({ picturePath }) => {
 
             <Divider sx={{ margin: "1.25rem 0" }} />
 
-            <FlexBetween>
-                <FlexBetween gap="0.25rem" onClick={() => setIsImage(!isImage)}>
+            <FlexBetweenComponent>
+                <FlexBetweenComponent gap="0.25rem" onClick={() => setIsImage(!isImage)}>
                     <ImageOutlined sx={{ color: mediumMain }} />
                     <Typography sx={{ "&:hover": { cursor: "pointer", color: medium } }} >
                         Image
                     </Typography>
-                </FlexBetween>
+                </FlexBetweenComponent>
                 {isNonMobileScreens ? (
                     <>
-                        <FlexBetween gap="0.25rem">
+                        <FlexBetweenComponent gap="0.25rem">
                             <GifBoxOutlined sx={{ color: medium }} />
                             <Typography color={mediumMain}>Clip</Typography>
-                        </FlexBetween>
+                        </FlexBetweenComponent>
 
-                        <FlexBetween gap="0.25rem">
+                        <FlexBetweenComponent gap="0.25rem">
                             <AttachFileOutlined sx={{ color: medium }} />
                             <Typography color={mediumMain}>Attachment</Typography>
-                        </FlexBetween>
+                        </FlexBetweenComponent>
 
-                        <FlexBetween gap="0.25rem">
+                        <FlexBetweenComponent gap="0.25rem">
                             <MicOutlined sx={{ color: medium }} />
                             <Typography color={mediumMain}>Audio</Typography>
-                        </FlexBetween>
+                        </FlexBetweenComponent>
 
                     </>
                 ) : (
-                    <FlexBetween gap="0.25rem" >
+                    <FlexBetweenComponent gap="0.25rem" >
                         <MoreHorizOutlined sx={{ color: mediumMain }} />
-                    </FlexBetween>
+                    </FlexBetweenComponent>
                 )}
 
                 <Button
@@ -160,8 +164,8 @@ const Post = ({ picturePath }) => {
                 >
                     POST
                 </Button>
-            </FlexBetween>
-        </WidgetWrapper>
+            </FlexBetweenComponent>
+        </WidgetWrapperComponent>
     )
 }
 
