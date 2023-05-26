@@ -1,2 +1,3 @@
-export { default as AuthService } from './auth-service';
-export { default as UsersService } from './users-service';
+export { default as AuthService } from './auth';
+export { default as UsersService } from './users';
+export { default as PostsService } from './posts';
