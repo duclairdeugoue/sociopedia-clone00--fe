@@ -1,5 +1,5 @@
 import { Box, useMediaQuery } from "@mui/material";
-import { HeaderWidget, ProfileWidget, PostWidget } from "widgets";
+import { HeaderWidget, ProfileWidget, CreatePostWidget } from "widgets";
 import { useSelector } from "react-redux";
 
 const Home = () => {
@@ -20,7 +20,7 @@ const Home = () => {
                 <Box
                     flexBasis={isNonMobileScreens ? "42%" : undefined}
                     mt={isNonMobileScreens ? undefined : "2rem"}>
-                    <PostWidget picturePath={picturePath} />
+                    <CreatePostWidget picturePath={picturePath} />
                 </Box>
                 {
                     isNonMobileScreens && (<Box flexBasis="26%"></Box>)

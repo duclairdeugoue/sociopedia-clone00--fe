@@ -28,7 +28,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "contexts";
 import { PostsService } from "services";
 
-const Post = ({ picturePath }) => {
+const Create = ({ picturePath }) => {
     const dispatch = useDispatch();
     const [isImage, setIsImage] = useState(false);
     const [image, setImage] = useState(null);
@@ -169,4 +169,4 @@ const Post = ({ picturePath }) => {
     )
 }
 
-export default Post;
+export default Create;
