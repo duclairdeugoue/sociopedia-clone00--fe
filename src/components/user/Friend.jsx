@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { setFriends } from "contexts";
 import { UsersService } from "services";
 import { FlexBetweenComponent, ImageUserComponent } from "components";
+import { useEffect } from "react";
 
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
@@ -26,7 +27,6 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
         const updatedFriendsList = await UsersService.addRemoveFriend(_id, friendId, token);
         dispatch(setFriends({ friends: updatedFriendsList }));
     };
-
 
     return (
         <FlexBetweenComponent>
@@ -56,7 +56,10 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
             </FlexBetweenComponent>
             {_id !== friendId && (
                 <IconButton
-                    onClick={() => patchFriend()}
+                    onClick={() => {
+                        patchFriend()
+                        // navigate(0)
+                    }}
                     sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
                 >
                     {isFriend ? (

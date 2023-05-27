@@ -1,5 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+// import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
     ManageAccountsOutlined,
@@ -18,31 +18,23 @@ import {
     FlexBetweenComponent,
     WidgetWrapperComponent
 } from 'components';
-import { UsersService } from "services";
+// import { UsersService } from "services";
 import linkedln from "assets/icons/linkedin.png";
 import twitter from "assets/icons/twitter.png";
-import { setFriends } from "contexts";
-
 
 const Profile = ({ userId, picturePath }) => {
-    const dispatch = useDispatch();
-    // const user = useSelector((state) => state.token);
-    const [user, setUser] = useState(null);
-    const { palette } = useTheme(null);
+    const user = useSelector((state) => state.user);
     const navigate = useNavigate();
-    const token = useSelector((state) => state.token);
+    console.log(user);
+    // const [user, setUser] = useState(null);
+    // const navigate = useNavigate();
+
+    const { palette } = useTheme(null);
+    // const token = useSelector((state) => state.token);
     const dark = palette.neutral.medium;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
 
-    const getLoggedInUserData = async () => {
-        await UsersService.getUser(userId, token)
-            .then((response) => setUser(response))
-            .catch(err => {
-                console.error(err);
-            }
-            );
-    }
     // const getLoggedInUserData = async () => {
     //     await UsersService.getUser(userId, token)
     //         .then((response) => {
@@ -53,10 +45,10 @@ const Profile = ({ userId, picturePath }) => {
     //         }
     //         );
     // }
-    useEffect(() => {
-        getLoggedInUserData();
-        console.log("Use effect ran");
-    }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    // useEffect(() => {
+    //     getLoggedInUserData();
+    //     console.log("Use effect ran");
+    // }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (!user) {
         return null;
