@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -14,16 +14,19 @@ import {
     useTheme
 } from "@mui/material";
 import {
-    UserImageComponent,
+    ImageUserComponent,
     FlexBetweenComponent,
     WidgetWrapperComponent
 } from 'components';
 import { UsersService } from "services";
 import linkedln from "assets/icons/linkedin.png";
 import twitter from "assets/icons/twitter.png";
+import { setFriends } from "contexts";
 
 
 const Profile = ({ userId, picturePath }) => {
+    const dispatch = useDispatch();
+    // const user = useSelector((state) => state.token);
     const [user, setUser] = useState(null);
     const { palette } = useTheme(null);
     const navigate = useNavigate();
@@ -40,8 +43,19 @@ const Profile = ({ userId, picturePath }) => {
             }
             );
     }
+    // const getLoggedInUserData = async () => {
+    //     await UsersService.getUser(userId, token)
+    //         .then((response) => {
+    //             dispatch()
+    //         })
+    //         .catch(err => {
+    //             console.error(err);
+    //         }
+    //         );
+    // }
     useEffect(() => {
         getLoggedInUserData();
+        console.log("Use effect ran");
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (!user) {
@@ -66,7 +80,7 @@ const Profile = ({ userId, picturePath }) => {
                 pb="1.1rem"
                 onClick={() => navigate(`/profile/${userId}`)}>
                 <FlexBetweenComponent gap="1rem">
-                    <UserImageComponent image={picturePath} />
+                    <ImageUserComponent image={picturePath} />
                     <Box>
                         <Typography
                             variant="h4"

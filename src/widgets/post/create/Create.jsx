@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import {
     FlexBetweenComponent,
-    UserImageComponent,
+    ImageUserComponent,
     WidgetWrapperComponent
 } from "components";
 import Dropzone from "react-dropzone";
@@ -58,7 +58,7 @@ const Create = ({ picturePath }) => {
     return (
         <WidgetWrapperComponent>
             <FlexBetweenComponent gap="1.5rem">
-                <UserImageComponent image={picturePath} />
+                <ImageUserComponent image={picturePath} />
                 <InputBase
                     placeholder="What is on your mind...?"
                     onChange={(e) => setPost(e.target.value)}
