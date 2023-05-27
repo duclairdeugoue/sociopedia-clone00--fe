@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { setFriends } from "contexts";
 import { UsersService } from "services";
 import { FlexBetweenComponent, ImageUserComponent } from "components";
-import { useEffect } from "react";
 
 
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
