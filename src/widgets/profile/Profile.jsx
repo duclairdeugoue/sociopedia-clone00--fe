@@ -25,7 +25,7 @@ import twitter from "assets/icons/twitter.png";
 const Profile = ({ userId, picturePath }) => {
     const user = useSelector((state) => state.user);
     const navigate = useNavigate();
-    console.log(user);
+    // console.log(user);
     // const [user, setUser] = useState(null);
     // const navigate = useNavigate();
 

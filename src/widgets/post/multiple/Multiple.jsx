@@ -10,12 +10,26 @@ const Multiple = ({ userId, isProfile = false }) => {
     const token = useSelector((state) => state.token);
 
     const fetchPostsByUser = async () => {
-        const data = await PostsService.getUserPosts(userId, token);
-        dispatch(setPosts({ posts: data }));
+        await PostsService.getUserPosts(userId, token)
+            .then((userPosts) => {
+                console.log("user posts fetched successfully");
+                dispatch(setPosts({ posts: userPosts }));
+            })
+            .catch((err) => {
+                dispatch(setPosts({ posts: [] }));
+                console.log("Error ", err.message)
+            });
     }
     const fetchPosts = async () => {
-        const data = await PostsService.getPosts(token);
-        dispatch(setPosts({ posts: data }));
+        await PostsService.getPosts(token)
+            .then((posts) => {
+                console.log("post fetched successfully");
+                dispatch(setPosts({ posts: posts }));
+            })
+            .catch((err) => {
+                dispatch(setPosts({ posts: [] }));
+                console.log("Error ", err.message)
+            });
     }
 
     useEffect(() => {

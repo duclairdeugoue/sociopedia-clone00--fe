@@ -17,9 +17,7 @@ const posts = {
             method: 'GET',
             headers: { 'x-api-token': `Bearer ${token}` }
         });
-
         return await res.json();
-
     },
     getUserPosts: async (userId, token) => {
         const res = await fetch(`${API_URL}/posts/${userId}/posts`, {
@@ -39,7 +37,6 @@ const posts = {
             },
             body: JSON.stringify({ userId: userId })
         });
-
         return await res.json();
     }
 }
