@@ -22,6 +22,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const medium = palette.neutral.medium;
 
   const isFriend = friends.find((friend) => friend._id === friendId);
+  // const isFriend = friendId === _id ? false : true;
 
   const patchFriend = async () => {
     const updatedFriendsList = await UsersService.addRemoveFriend(_id, friendId, token);

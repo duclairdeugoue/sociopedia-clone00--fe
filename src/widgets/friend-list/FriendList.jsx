@@ -6,7 +6,7 @@ import {
 } from 'components';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFriends } from 'contexts';
+// import { setFriends } from 'contexts';
 import { UsersService } from 'services';
 
 const FriendList = ({ userId }) => {
@@ -19,20 +19,21 @@ const FriendList = ({ userId }) => {
   const token = useSelector((state) => state.token);
   const loggedUser = useSelector((state) => state.user);
 
-  const setLoggedUserFriends = () => {
-    setFriends(loggedUser.friends);
+  // const setLoggedUserFriends = () => {
+  //   setFriends(loggedUser.friends);
 
-    // UsersService.getUserFriends(userId, token)
-    // .then((res) => {
-    //   dispatch(setFriends(() => ({ ...friends, friends: res })));
-    //   setFriendsLocalState(loggedUser.friends);
-    // })
-    // .catch((err) => { console.error(err); });
-  };
+  //   // UsersService.getUserFriends(userId, token)
+  //   // .then((res) => {
+  //   //   dispatch(setFriends(() => ({ ...friends, friends: res })));
+  //   //   setFriendsLocalState(loggedUser.friends);
+  //   // })
+  //   // .catch((err) => { console.error(err); });
+  // };
 
   const setSelectedUserFriends = (userId, token) => {
     UsersService.getUserFriends(userId, token)
       .then((res) => {
+        console.log(res);
         setFriends(res);
       })
       .catch((err) => { console.error(err); });
@@ -46,17 +47,18 @@ const FriendList = ({ userId }) => {
   //     .catch((err) => { console.error(err); });
   // }
 
-  const initializeFriendList = () => {
-    if (loggedUser._id === userId) {
-      setLoggedUserFriends();
-    } else {
-      setSelectedUserFriends(userId, token);
-    }
-  }
+  // const initializeFriendList = () => {
+  //   if (loggedUser._id === userId) {
+  //     setLoggedUserFriends();
+  //   } else {
+  //     setSelectedUserFriends(userId, token);
+  //   }
+  // }
 
 
   useEffect(() => {
-    initializeFriendList();
+    // initializeFriendList();
+    setSelectedUserFriends(userId, token);
   }, [loggedUser]); // eslint-disable-line
 
 
@@ -68,12 +70,7 @@ const FriendList = ({ userId }) => {
         fontWeight="500"
         sx={{ mb: "1.5rem" }}
       >
-        {loggedUser._id === userId ? (
-          `Following `
-        ) : (
-          `Followers `
-        )}
-        ({friends.length})
+        Followings ({friends.length})
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem" >
         {!friends.length ? (

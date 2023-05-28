@@ -19,9 +19,9 @@ const Profile = () => {
   const { userId } = useParams();
 
 
-  const setLoggedInUser = () => {
-    setUser(loggedInUser);
-  };
+  // const setLoggedInUser = () => {
+  //   setUser(loggedInUser);
+  // };
 
   const setSelectedUser = (userId, token) => {
     UsersService.getUser(userId, token)
@@ -33,16 +33,17 @@ const Profile = () => {
       })
   };
 
-  const initalizeCurrentUser = () => {
-    if (userId === loggedInUser._id) {
-      setLoggedInUser();
-    } else {
-      setSelectedUser(userId, token);
-    }
-  }
+  // const initalizeCurrentUser = () => {
+  //   if (userId === loggedInUser._id) {
+  //     setLoggedInUser();
+  //   } else {
+  //     setSelectedUser(userId, token);
+  //   }
+  // }
 
   useEffect(() => {
-    initalizeCurrentUser();
+    // initalizeCurrentUser();
+    setSelectedUser(userId, token);
   }, []); //eslint-disable-line
 
   if (!user) {
