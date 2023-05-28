@@ -13,15 +13,11 @@ import { useMediaQuery, Box } from '@mui/material';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
-  const loggedInUser = useSelector((state) => state.user);
+  // const loggedInUser = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const { userId } = useParams();
 
-
-  // const setLoggedInUser = () => {
-  //   setUser(loggedInUser);
-  // };
 
   const setSelectedUser = (userId, token) => {
     UsersService.getUser(userId, token)
@@ -32,14 +28,6 @@ const Profile = () => {
         console.log("Could not set user for the page");
       })
   };
-
-  // const initalizeCurrentUser = () => {
-  //   if (userId === loggedInUser._id) {
-  //     setLoggedInUser();
-  //   } else {
-  //     setSelectedUser(userId, token);
-  //   }
-  // }
 
   useEffect(() => {
     // initalizeCurrentUser();

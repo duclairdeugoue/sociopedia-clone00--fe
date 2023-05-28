@@ -9,7 +9,7 @@ import {
 import { Formik } from 'formik';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { setLogin, setUser, setToken, setFriends } from "contexts";
+import { setUser, setToken, setFriends } from "contexts";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthService, UsersService } from "services";
 import { useEffect } from 'react';
@@ -67,7 +67,7 @@ const Login = () => {
 
   useEffect(() => {
     checkCurrentLoggedUserExist(user, token);
-  }, []);
+  }, []); // eslint-disable-line
 
 
   return (
