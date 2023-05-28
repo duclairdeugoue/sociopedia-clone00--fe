@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -18,37 +18,53 @@ import {
   FlexBetweenComponent,
   WidgetWrapperComponent
 } from 'components';
-import { UsersService } from "services";
+// import { UsersService } from "services";
 import linkedln from "assets/icons/linkedin.png";
 import twitter from "assets/icons/twitter.png";
+import { UsersService } from "services";
 
-const Profile = ({ userId, picturePath }) => {
-  const user = useSelector((state) => state.user);
-  const navigate = useNavigate();
-  // console.log(user);
-  // const [user, setUser] = useState(null);
-  // const navigate = useNavigate();
+const Profile = ({ userId }) => {
+  let [user, setUser] = useState(null);
+
+  const token = useSelector((state) => state.token);
+  const loggedInUser = useSelector((state) => state.user);
 
   const { palette } = useTheme(null);
-  const token = useSelector((state) => state.token);
   const dark = palette.neutral.medium;
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
 
-  // const getLoggedInUserData = async () => {
-  //     await UsersService.getUser(userId, token)
-  //         .then((res) => {
-  //             setUser(() => res);
-  //             console.log(res);
-  //         })
-  //         .catch(err => {
-  //             console.error(err);
-  //         });
-  // }
-  // useEffect(() => {
-  //     // getLoggedInUserData();
-  //     // console.log("Use effect ran");
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const navigate = useNavigate();
+
+  const setSelectedUserData = async (userId, token) => {
+    await UsersService.getUser(userId, token)
+      .then((res) => {
+        console.log(res.data.user);
+        setUser(res.data.user);
+      })
+      .catch((err) => {
+        setUser(null);
+        console.log("Couldn't set user data: " + err.message);
+      })
+  }
+
+  const setLoggedInUserData = () => {
+    setUser(loggedInUser);
+  };
+
+  const initializeCurrentUser = () => {
+    if (loggedInUser._id === userId) {
+      setLoggedInUserData();
+      console.log("Detected User: Logged In User");
+    } else {
+      console.log("Detected User: Selected User");
+      setSelectedUserData(userId, token);
+    }
+  };
+
+  useEffect(() => {
+    initializeCurrentUser();
+  }, [userId, loggedInUser]); // eslint-disable-line
 
   if (!user) {
     return null;
@@ -57,12 +73,14 @@ const Profile = ({ userId, picturePath }) => {
   const {
     firstName,
     lastName,
+    picturePath,
     location,
     occupation,
     viewedProfile,
     impressions,
     friends,
   } = user;
+
 
   return (
     <WidgetWrapperComponent>

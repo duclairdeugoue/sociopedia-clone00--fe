@@ -4,32 +4,51 @@ import {
   FriendUserComponent,
   WidgetWrapperComponent
 } from 'components';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFriends } from 'contexts';
 import { UsersService } from 'services';
 
 const FriendList = ({ userId }) => {
-  const dispatch = useDispatch();
+  let [friends, setFriends] = useState(null);
   const { palette } = useTheme();
   const dark = palette.neutral.dark;
   const main = palette.neutral.main;
   const medium = palette.neutral.medium;
   const token = useSelector((state) => state.token);
-  const friends = useSelector((state) => state.user.friends);
+  const loggedUser = useSelector((state) => state.user);
 
-  // console.log(listOfFriendIds);
-  const fetchUserFriends = async () => {
+  const setLoggedUserFriends = () => {
+    setFriends(loggedUser.friends);
+  };
+
+  const setSelectedUserFriends = async (userId, token) => {
     await UsersService.getUserFriends(userId, token)
       .then((res) => {
-        dispatch(setFriends({ friends: res }));
+        setFriends(res);
       })
       .catch((err) => { console.error(err); });
+  };
+  // console.log(listOfFriendIds);
+  // const fetchUserFriends = async () => {
+  //   await UsersService.getUserFriends(userId, token)
+  //     .then((res) => {
+  //       dispatch(setFriends({ friends: res }));
+  //     })
+  //     .catch((err) => { console.error(err); });
+  // }
+
+  const initializeFriendList = () => {
+    if (loggedUser._id === userId) {
+      setLoggedUserFriends();
+    } else {
+      setSelectedUserFriends(userId, token);
+    }
   }
 
   useEffect(() => {
-    fetchUserFriends();
-  }, []); // eslint-disable-line
+    initializeFriendList();
+  }, [userId, loggedUser]); // eslint-disable-line
 
   return (
     <WidgetWrapperComponent>
@@ -39,15 +58,16 @@ const FriendList = ({ userId }) => {
         fontWeight="500"
         sx={{ mb: "1.5rem" }}
       >
-        Friend List
+        Friend List ({friends.length})
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem" >
-        {!friends ? (
+        {!friends.length ? (
           <Box>No Friends Yet</Box>
         ) : (
           friends.map((friend) => (
             <FriendUserComponent
               key={friend._id}
+              friendId={friend._id}
               name={`${friend.firstName} ${friend.lastName}`}
               subtitle={friend.occupation}
               userPicturePath={friend.picturePath}

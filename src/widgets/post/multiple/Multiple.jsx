@@ -5,70 +5,70 @@ import { SinglePostWidget } from "widgets";
 import { PostsService } from "services";
 
 const Multiple = ({ userId, isProfile = false }) => {
-    const dispatch = useDispatch();
-    const posts = useSelector((state) => state.posts);
-    const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts);
+  const token = useSelector((state) => state.token);
 
-    const fetchPostsByUser = async () => {
-        await PostsService.getUserPosts(userId, token)
-            .then((userPosts) => {
-                console.log("user posts fetched successfully");
-                dispatch(setPosts({ posts: userPosts }));
-            })
-            .catch((err) => {
-                dispatch(setPosts({ posts: [] }));
-                console.log("Error ", err.message)
-            });
+  const fetchPostsByUser = async () => {
+    await PostsService.getUserPosts(userId, token)
+      .then((userPosts) => {
+        console.log("user posts fetched successfully");
+        dispatch(setPosts({ posts: userPosts }));
+      })
+      .catch((err) => {
+        dispatch(setPosts({ posts: [] }));
+        console.log("Error ", err.message)
+      });
+  }
+  const fetchPosts = async () => {
+    await PostsService.getPosts(token)
+      .then((posts) => {
+        console.log("post fetched successfully");
+        dispatch(setPosts({ posts: posts }));
+      })
+      .catch((err) => {
+        dispatch(setPosts({ posts: [] }));
+        console.log("Error ", err.message)
+      });
+  }
+
+  useEffect(() => {
+    if (isProfile) {
+      fetchPostsByUser();
+    } else {
+      fetchPosts();
     }
-    const fetchPosts = async () => {
-        await PostsService.getPosts(token)
-            .then((posts) => {
-                console.log("post fetched successfully");
-                dispatch(setPosts({ posts: posts }));
-            })
-            .catch((err) => {
-                dispatch(setPosts({ posts: [] }));
-                console.log("Error ", err.message)
-            });
-    }
+  }, [isProfile]); // eslint-disable-line  react-hooks/exhaustive-deps
 
-    useEffect(() => {
-        if (isProfile) {
-            fetchPostsByUser();
-        } else {
-            fetchPosts();
-        }
-    }, []); // eslint-disable-line  react-hooks/exhaustive-deps
-
-    return (
-        <>
-            {posts.map(({
-                _id,
-                userId,
-                firstName,
-                lastName,
-                description,
-                location,
-                picturePath,
-                userPicturePath,
-                likes,
-                comments
-            }) => (
-                <SinglePostWidget
-                    key={_id}
-                    postId={_id}
-                    postUserId={userId}
-                    name={`${firstName} ${lastName}`}
-                    description={description}
-                    location={location}
-                    picturePath={picturePath}
-                    userPicturePath={userPicturePath}
-                    likes={likes}
-                    comments={comments}
-                />
-            ))}
-        </>
-    );
+  return (
+    <>
+      {posts.map(({
+        _id,
+        userId,
+        firstName,
+        lastName,
+        description,
+        location,
+        picturePath,
+        userPicturePath,
+        likes,
+        comments
+      }) => (
+        <SinglePostWidget
+          key={_id}
+          postId={_id}
+          postUserId={userId}
+          name={`${firstName} ${lastName}`}
+          description={description}
+          location={location}
+          picturePath={picturePath}
+          userPicturePath={userPicturePath}
+          likes={likes}
+          comments={comments}
+        />
+      ))}
+    </>
+  );
 }
 
 export default Multiple
