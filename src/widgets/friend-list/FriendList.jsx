@@ -59,6 +59,7 @@ const FriendList = ({ userId }) => {
     initializeFriendList();
   }, [loggedUser]); // eslint-disable-line
 
+
   return (
     <WidgetWrapperComponent>
       <Typography
@@ -73,9 +74,9 @@ const FriendList = ({ userId }) => {
         {!friends.length ? (
           <Box>No Friends Yet</Box>
         ) : (
-          friends.map((friend) => (
+          friends.map((friend, i) => (
             <FriendUserComponent
-              key={friend._id}
+              key={`${friend._id} ${i}`}
               friendId={friend._id}
               name={`${friend.firstName} ${friend.lastName}`}
               subtitle={friend.occupation}
