@@ -68,7 +68,12 @@ const FriendList = ({ userId }) => {
         fontWeight="500"
         sx={{ mb: "1.5rem" }}
       >
-        Friend List ({friends.length})
+        {loggedUser._id === userId ? (
+          `Following `
+        ) : (
+          `Followers `
+        )}
+        ({friends.length})
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem" >
         {!friends.length ? (

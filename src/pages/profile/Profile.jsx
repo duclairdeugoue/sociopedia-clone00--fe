@@ -9,12 +9,13 @@ import {
   CreatePostWidget,
   ProfileWidget
 } from 'widgets';
-import { useMediaQuery } from '@mui/material';
+import { useMediaQuery, Box } from '@mui/material';
+
 const Profile = () => {
   const [user, setUser] = useState(null);
   const loggedInUser = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
-  const isNonMobileScreen = useMediaQuery("(min-width: 1000px)");
+  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
   const { userId } = useParams();
 
 
@@ -48,9 +49,34 @@ const Profile = () => {
     return null;
   }
   return (
-    <>
-      {user.firstName}
-    </>
+    <Box>
+      <HeaderWidget />
+      <Box
+        width="100%"
+        padding="2rem 6%"
+        display={isNonMobileScreens ? "flex" : "block"}
+        gap="2rem"
+        justifyContent="center"
+      >
+        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+          <ProfileWidget userId={userId} />
+          <Box m="2rem 0" />
+          <FriendListWidget userId={userId} />
+        </Box>
+        <Box
+          flexBasis={isNonMobileScreens ? "42%" : undefined}
+          mt={isNonMobileScreens ? undefined : "2rem"}>
+          <CreatePostWidget />
+          <Box m="2rem 0" />
+          <MultiplePostWidget userId={user._id} isProfile />
+        </Box>
+        {
+          isNonMobileScreens && (<Box flexBasis="26%">
+            <Box m="2rem 0"></Box>
+          </Box>)
+        }
+      </Box>
+    </Box>
   );
 }
 

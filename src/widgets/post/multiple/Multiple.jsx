@@ -22,14 +22,21 @@ const Multiple = ({ userId, isProfile = false }) => {
   }
   const fetchPosts = () => {
     PostsService.getPosts(token)
-      .then((posts) => {
-        console.log("post fetched successfully");
-        dispatch(setPosts({ posts: posts }));
+      .then((res) => {
+        if (res.ok) {
+          console.log("post fetched successfully");
+          dispatch(setPosts({ posts: res.data.posts }));
+
+        } else {
+          console.log("some went wrong");
+        }
       })
       .catch((err) => {
         dispatch(setPosts({ posts: [] }));
         console.log("Error ", err.message)
       });
+
+
   }
 
   useEffect(() => {

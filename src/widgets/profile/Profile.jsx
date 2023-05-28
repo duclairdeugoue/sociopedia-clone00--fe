@@ -102,7 +102,7 @@ const Profile = ({ userId }) => {
               }}>
               {firstName} {lastName}
             </Typography>
-            <Typography color={medium}>{friends.length} friends</Typography>
+            <Typography color={medium}>{friends.length} Friends</Typography>
           </Box>
         </FlexBetweenComponent>
         <ManageAccountsOutlined />
