@@ -5,3 +5,8 @@ html, body, #root, .app {
   width: 100%;
   font-family: "Rubik", sans-serif;
 }
+
+/* 
+body>iframe {
+  display: none;
+} */

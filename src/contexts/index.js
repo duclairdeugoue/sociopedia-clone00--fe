@@ -26,6 +26,7 @@ export const authSlice = createSlice({
     },
     setLogout: (state) => {
       state.user = null;
+      state.posts = [];
       state.token = null;
     },
     setFriends: (state, action) => {

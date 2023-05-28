@@ -10,8 +10,9 @@ import { setFriends } from 'contexts';
 import { UsersService } from 'services';
 
 const FriendList = ({ userId }) => {
-  let [friends, setFriends] = useState(null);
+  const [friends, setFriends] = useState([]);
   const { palette } = useTheme();
+  const dispatch = useDispatch();
   const dark = palette.neutral.dark;
   const main = palette.neutral.main;
   const medium = palette.neutral.medium;
@@ -20,10 +21,17 @@ const FriendList = ({ userId }) => {
 
   const setLoggedUserFriends = () => {
     setFriends(loggedUser.friends);
+
+    // UsersService.getUserFriends(userId, token)
+    // .then((res) => {
+    //   dispatch(setFriends(() => ({ ...friends, friends: res })));
+    //   setFriendsLocalState(loggedUser.friends);
+    // })
+    // .catch((err) => { console.error(err); });
   };
 
-  const setSelectedUserFriends = async (userId, token) => {
-    await UsersService.getUserFriends(userId, token)
+  const setSelectedUserFriends = (userId, token) => {
+    UsersService.getUserFriends(userId, token)
       .then((res) => {
         setFriends(res);
       })
@@ -46,9 +54,10 @@ const FriendList = ({ userId }) => {
     }
   }
 
+
   useEffect(() => {
     initializeFriendList();
-  }, [userId, loggedUser]); // eslint-disable-line
+  }, [loggedUser]); // eslint-disable-line
 
   return (
     <WidgetWrapperComponent>

@@ -55,16 +55,14 @@ const Profile = ({ userId }) => {
   const initializeCurrentUser = () => {
     if (loggedInUser._id === userId) {
       setLoggedInUserData();
-      console.log("Detected User: Logged In User");
     } else {
-      console.log("Detected User: Selected User");
       setSelectedUserData(userId, token);
     }
   };
 
   useEffect(() => {
     initializeCurrentUser();
-  }, [userId, loggedInUser]); // eslint-disable-line
+  }, [loggedInUser]); // eslint-disable-line
 
   if (!user) {
     return null;

@@ -9,8 +9,8 @@ const Multiple = ({ userId, isProfile = false }) => {
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
 
-  const fetchPostsByUser = async () => {
-    await PostsService.getUserPosts(userId, token)
+  const fetchPostsByUser = () => {
+    PostsService.getUserPosts(userId, token)
       .then((userPosts) => {
         console.log("user posts fetched successfully");
         dispatch(setPosts({ posts: userPosts }));
@@ -20,8 +20,8 @@ const Multiple = ({ userId, isProfile = false }) => {
         console.log("Error ", err.message)
       });
   }
-  const fetchPosts = async () => {
-    await PostsService.getPosts(token)
+  const fetchPosts = () => {
+    PostsService.getPosts(token)
       .then((posts) => {
         console.log("post fetched successfully");
         dispatch(setPosts({ posts: posts }));
@@ -38,7 +38,7 @@ const Multiple = ({ userId, isProfile = false }) => {
     } else {
       fetchPosts();
     }
-  }, [isProfile]); // eslint-disable-line  react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line  react-hooks/exhaustive-deps
 
   return (
     <>

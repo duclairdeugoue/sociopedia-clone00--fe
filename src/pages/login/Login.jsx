@@ -9,7 +9,7 @@ import {
 import { Formik } from 'formik';
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
-import { setLogin, setUser, setToken } from "contexts";
+import { setLogin, setUser, setToken, setFriends } from "contexts";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthService, UsersService } from "services";
 import { useEffect } from 'react';
@@ -32,9 +32,9 @@ const Login = () => {
     password: "",
   };
 
-  const checkCurrentLoggedUserExist = async (user, token) => {
+  const checkCurrentLoggedUserExist = (user, token) => {
     if (user !== null && token !== null) {
-      await UsersService.getUser(user._id, token)
+      UsersService.getUser(user._id, token)
         .then((res) => {
           if (res.ok) {
             return navigate("/home");
@@ -42,18 +42,19 @@ const Login = () => {
             console.log("user does not exist");
           }
         })
+        .catch((err) => { console.log(err.message) })
     }
   }
 
-  const handleLoginFormSubmit = async (values, onSubmitProps) => {
-    await AuthService.login(values)
+  const handleLoginFormSubmit = (values, onSubmitProps) => {
+    AuthService.login(values)
       .then((res) => {
         if (res.ok) {
-          // dispatch(
-          //   setLogin(({ prevState }) => ({ ...prevState, user: res.data.user, token: res.data.token }))
-          // );
           dispatch(setToken({ token: res.data.token }));
           dispatch(setUser({ user: res.data.user }));
+          UsersService.getUserFriends(res.data.user._id, res.data.token).then((res) => {
+            dispatch(setFriends({ friends: res }))
+          })
           onSubmitProps.resetForm();
           navigate("/home");
         } else {
