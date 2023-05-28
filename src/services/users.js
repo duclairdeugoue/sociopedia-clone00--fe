@@ -11,6 +11,16 @@ const users = {
         )
         return await res.json();
     },
+    getUserFriends: async (userId, token) => {
+        const res = await fetch(
+            `${API_URL}/users/${userId}/friends`,
+            {
+                method: 'GET',
+                headers: { 'x-api-token': `Bearer ${token}` }
+            }
+        )
+        return await res.json();
+    },
     addRemoveFriend: async (userId, friendId, token) => {
         const res = await fetch(
             `${API_URL}/users/${userId}/${friendId}`,

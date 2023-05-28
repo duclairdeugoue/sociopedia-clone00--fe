@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
     ManageAccountsOutlined,
@@ -18,37 +18,37 @@ import {
     FlexBetweenComponent,
     WidgetWrapperComponent
 } from 'components';
-// import { UsersService } from "services";
+import { UsersService } from "services";
 import linkedln from "assets/icons/linkedin.png";
 import twitter from "assets/icons/twitter.png";
 
 const Profile = ({ userId, picturePath }) => {
-    const user = useSelector((state) => state.user);
+    // const user = useSelector((state) => state.user);
     const navigate = useNavigate();
     // console.log(user);
-    // const [user, setUser] = useState(null);
+    const [user, setUser] = useState(null);
     // const navigate = useNavigate();
 
     const { palette } = useTheme(null);
-    // const token = useSelector((state) => state.token);
+    const token = useSelector((state) => state.token);
     const dark = palette.neutral.medium;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
 
-    // const getLoggedInUserData = async () => {
-    //     await UsersService.getUser(userId, token)
-    //         .then((response) => {
-    //             dispatch()
-    //         })
-    //         .catch(err => {
-    //             console.error(err);
-    //         }
-    //         );
-    // }
-    // useEffect(() => {
-    //     getLoggedInUserData();
-    //     console.log("Use effect ran");
-    // }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    const getLoggedInUserData = async () => {
+        await UsersService.getUser(userId, token)
+            .then((res) => {
+                setUser(() => res);
+                console.log(res);
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }
+    useEffect(() => {
+        getLoggedInUserData();
+        console.log("Use effect ran");
+    }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
     if (!user) {
         return null;
