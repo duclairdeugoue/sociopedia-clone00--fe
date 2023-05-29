@@ -49,7 +49,7 @@ export const {
   setMode,
   setLogin,
   setUser,
-  etToken,
+  setToken,
   setLogout,
   setFriends,
   setPosts,

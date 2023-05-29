@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { setUser, setToken, setFriends } from "contexts";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthService, UsersService } from "services";
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 const Login = () => {
   const { palette } = useTheme();
@@ -32,19 +32,19 @@ const Login = () => {
     password: "",
   };
 
-  const checkCurrentLoggedUserExist = (user, token) => {
-    if (user !== null && token !== null) {
-      UsersService.getUser(user._id, token)
-        .then((res) => {
-          if (res.ok) {
-            return navigate("/home");
-          } else {
-            console.log("user does not exist");
-          }
-        })
-        .catch((err) => { console.log(err.message) })
-    }
-  }
+  // const checkCurrentLoggedUserExist = (user, token) => {
+  //   if (user !== null && token !== null) {
+  //     UsersService.getUser(user._id, token)
+  //       .then((res) => {
+  //         if (res.ok) {
+  //           return navigate("/home");
+  //         } else {
+  //           console.log("user does not exist");
+  //         }
+  //       })
+  //       .catch((err) => { console.log(err.message) })
+  //   }
+  // }
 
   const handleLoginFormSubmit = (values, onSubmitProps) => {
     AuthService.login(values)
@@ -65,9 +65,9 @@ const Login = () => {
 
   }
 
-  useEffect(() => {
-    checkCurrentLoggedUserExist(user, token);
-  }, []); // eslint-disable-line
+  // useEffect(() => {
+  //   checkCurrentLoggedUserExist(user, token);
+  // }, []); // eslint-disable-line
 
 
   return (

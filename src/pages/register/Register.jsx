@@ -54,7 +54,7 @@ const Register = () => {
         onSubmitProps.resetForm();
         navigate('/login');
       }
-    });
+    }).catch((err) => { console.log(err); });
 
   }
 
