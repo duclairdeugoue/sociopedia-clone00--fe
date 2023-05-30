@@ -61,7 +61,7 @@ const Login = () => {
           console.log("Wrong Email or Password");
         }
       })
-      .catch((err) => { console.log(err.message); })
+      .catch((err) => { console.log(err); })
 
   }
 
